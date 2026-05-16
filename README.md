@@ -76,8 +76,9 @@ spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-Use ddl-auto=update only during early development if you prefer Hibernate to manage schema changes.
 ```
+
+Use ddl-auto=update only during early development if you prefer Hibernate to manage schema changes.
 
 ### 4. Run the API
 
@@ -103,6 +104,7 @@ The API runs at http://localhost:8080 by default.
 | DELETE | `/api/users/{id}`  | Delete a user    |
 
 Example: create user
+```bash
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{
@@ -111,9 +113,11 @@ curl -X POST http://localhost:8080/api/users \
     "password": "your-secure-password",
     "role": "USER"
   }'
+```
 Passwords must be hashed server-side (e.g. BCrypt). Do not return password in API responses.
 
 Project structure
+```bash
 src/main/java/com/example/api/
 ├── ApiApplication.java
 ├── controller/     # REST controllers
@@ -121,6 +125,7 @@ src/main/java/com/example/api/
 ├── repository/     # Spring Data repositories
 ├── service/        # Business logic
 └── dto/            # Request/response objects (optional)
+```
 Security notes
 Hash passwords before persisting (BCryptPasswordEncoder or similar).
 Exclude password from JSON responses.
@@ -132,4 +137,4 @@ License
 MIT (or specify your license here.)
 
 Author
-Lucas — GitHub
+Lucas Soares — GitHub
