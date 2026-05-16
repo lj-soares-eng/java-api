@@ -78,6 +78,7 @@ Or with Gradle:
 
 ./gradlew bootRun
 The API runs at http://localhost:8080 by default.
+```
 
 ## API endpoints
 
