@@ -126,15 +126,16 @@ src/main/java/com/example/api/
 ├── service/        # Business logic
 └── dto/            # Request/response objects (optional)
 ```
-Security notes
-Hash passwords before persisting (BCryptPasswordEncoder or similar).
-Exclude password from JSON responses.
-Validate input (@Valid, Bean Validation).
-Use HTTPS in production.
+## Security notes
+- Hash passwords before persisting (BCryptPasswordEncoder or similar).
+- Exclude password from JSON responses.
+- Validate input (@Valid, Bean Validation).
+- Use HTTPS in production.
+
 Related work
 
-License
+## License
 MIT (or specify your license here.)
 
-Author
+## Author
 Lucas Soares — GitHub
