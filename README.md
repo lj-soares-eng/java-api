@@ -103,7 +103,7 @@ The API runs at http://localhost:8080 by default.
 | PUT    | `/api/users/{id}`  | Update a user    |
 | DELETE | `/api/users/{id}`  | Delete a user    |
 
-Example: create user
+## Example: create user
 ```bash
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
@@ -116,7 +116,7 @@ curl -X POST http://localhost:8080/api/users \
 ```
 Passwords must be hashed server-side (e.g. BCrypt). Do not return password in API responses.
 
-Project structure
+## Project structure
 ```bash
 src/main/java/com/example/api/
 ├── ApiApplication.java
@@ -131,8 +131,6 @@ src/main/java/com/example/api/
 - Exclude password from JSON responses.
 - Validate input (@Valid, Bean Validation).
 - Use HTTPS in production.
-
-Related work
 
 ## License
 MIT (or specify your license here.)
