@@ -49,8 +49,11 @@ This project demonstrates core engineering practices layered architecture, REST 
 ```bash
 git clone https://github.com/YOUR_USERNAME/java-api.git
 cd java-api
+```
 
-2. Create the database
+### 2. Create the database
+
+```bash
 CREATE DATABASE users_api;
 USE users_api;
 CREATE TABLE users (
@@ -61,9 +64,12 @@ CREATE TABLE users (
     role VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-3. Configure the application
+```
+
+### 3. Configure the application
 Update src/main/resources/application.properties (or application.yml):
 
+```bash
 spring.datasource.url=jdbc:mysql://localhost:3306/users_api
 spring.datasource.username=your_user
 spring.datasource.password=your_password
@@ -71,14 +77,20 @@ spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 Use ddl-auto=update only during early development if you prefer Hibernate to manage schema changes.
+```
 
-4. Run the API
+### 4. Run the API
+
+```bash
 ./mvnw spring-boot:run
+```
 Or with Gradle:
 
+```bash
 ./gradlew bootRun
-The API runs at http://localhost:8080 by default.
 ```
+The API runs at http://localhost:8080 by default.
+
 
 ## API endpoints
 
