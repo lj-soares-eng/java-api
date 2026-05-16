@@ -79,23 +79,16 @@ Or with Gradle:
 ./gradlew bootRun
 The API runs at http://localhost:8080 by default.
 
-API endpoints
-Method	Endpoint	Description
-GET
-/api/users
-List all users
-GET
-/api/users/{id}
-Get user by ID
-POST
-/api/users
-Create a user
-PUT
-/api/users/{id}
-Update a user
-DELETE
-/api/users/{id}
-Delete a user
+## API endpoints
+
+| Method | Endpoint           | Description      |
+|--------|--------------------|------------------|
+| GET    | `/api/users`       | List all users   |
+| GET    | `/api/users/{id}`  | Get user by ID   |
+| POST   | `/api/users`       | Create a user    |
+| PUT    | `/api/users/{id}`  | Update a user    |
+| DELETE | `/api/users/{id}`  | Delete a user    |
+
 Example: create user
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
