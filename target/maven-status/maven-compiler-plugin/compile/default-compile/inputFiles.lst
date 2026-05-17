@@ -1,0 +1,15 @@
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/UsersApiApplication.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/config/PasswordEncoderConfig.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/controller/HomeController.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/controller/UserController.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/dto/UserCreateRequest.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/dto/UserResponse.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/dto/UserUpdateRequest.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/exception/ApiErrorResponse.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/exception/DuplicateEmailException.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/exception/GlobalExceptionHandler.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/exception/UserNotFoundException.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/model/Role.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/model/User.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/repository/UserRepository.java
+/home/lucas/Documents/java-api/src/main/java/com/example/usersapi/service/UserService.java
