@@ -31,7 +31,7 @@ This project demonstrates core engineering practices layered architecture, REST 
 | `id`       | INT, PK, AI    | Auto-increment primary key     |
 | `name`     | VARCHAR        | User display name              |
 | `email`    | VARCHAR        | Unique email                   |
-| `password` | VARCHAR        | Stored hashed (never plain text)|
+| `password` | VARCHAR        | BCrypt hash (exposed as `passwordHash` in JSON) |
 | `role`     | VARCHAR        | e.g. `USER`, `ADMIN`           |
 | `created_at` | TIMESTAMP    | Set at creation time           |
 
@@ -85,12 +85,14 @@ Use ddl-auto=update only during early development if you prefer Hibernate to man
 ```bash
 ./mvnw spring-boot:run
 ```
-Or with Gradle:
+
+Or with system Maven:
 
 ```bash
-./gradlew bootRun
+mvn spring-boot:run
 ```
-The API runs at http://localhost:8080 by default.
+
+The API runs at `http://localhost:8080` by default.
 
 
 ## API endpoints
@@ -114,22 +116,26 @@ curl -X POST http://localhost:8080/api/users \
     "role": "USER"
   }'
 ```
-Passwords must be hashed server-side (e.g. BCrypt). Do not return password in API responses.
+Responses include `passwordHash` (BCrypt) on success; plain `password` is never returned. Send `password` only in POST/PUT request bodies.
 
 ## Project structure
-```bash
-src/main/java/com/example/api/
-├── ApiApplication.java
+
+```text
+src/main/java/com/example/usersapi/
+├── UsersApiApplication.java
 ├── controller/     # REST controllers
 ├── model/          # JPA entities
 ├── repository/     # Spring Data repositories
 ├── service/        # Business logic
-└── dto/            # Request/response objects (optional)
+└── dto/            # Request/response DTOs
 ```
+
 ## Security notes
-- Hash passwords before persisting (BCryptPasswordEncoder or similar).
-- Exclude password from JSON responses.
-- Validate input (@Valid, Bean Validation).
+
+- Hash passwords with BCrypt before persisting.
+- GET `/api/users` and GET `/api/users/{id}` may include `passwordHash` in JSON (demo/debug).
+- POST/PUT success responses must not echo plain-text `password` (may include `passwordHash`).
+- Validate input (`@Valid`, Bean Validation).
 - Use HTTPS in production.
 
 ## License

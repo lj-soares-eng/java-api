@@ -25,10 +25,10 @@
 
 **Purpose**: Initialize Spring Boot Maven project
 
-- [ ] T001 Create `pom.xml` with Spring Boot 3 parent, web, data-jpa, validation, mysql-connector-j, spring-security-crypto, spring-boot-starter-test
-- [ ] T002 Create `src/main/java/com/example/usersapi/UsersApiApplication.java` main class
-- [ ] T003 [P] Create `src/main/resources/application.properties` per plan.md (datasource, JPA, env vars)
-- [ ] T004 [P] Add Maven Wrapper (`mvnw`, `.mvn/wrapper/`) for reproducible builds
+- [x] T001 Create `pom.xml` with Spring Boot 3 parent, web, data-jpa, validation, mysql-connector-j, spring-security-crypto, spring-boot-starter-test
+- [x] T002 Create `src/main/java/com/example/usersapi/UsersApiApplication.java` main class
+- [x] T003 [P] Create `src/main/resources/application.properties` per plan.md (datasource, JPA, env vars)
+- [x] T004 [P] Add Maven Wrapper (`mvnw`, `.mvn/wrapper/`) for reproducible builds
 
 ---
 
@@ -38,17 +38,17 @@
 
 **⚠️ CRITICAL**: No user story endpoint work until this phase is complete
 
-- [ ] T005 [P] Create `src/main/java/com/example/usersapi/model/Role.java` enum (USER, ADMIN)
-- [ ] T006 Create `src/main/java/com/example/usersapi/model/User.java` JPA entity per data-model.md
-- [ ] T007 Create `src/main/java/com/example/usersapi/repository/UserRepository.java` with `existsByEmail` and standard JpaRepository methods
-- [ ] T008 [P] Create `src/main/java/com/example/usersapi/dto/UserCreateRequest.java` with Jakarta Validation annotations
-- [ ] T009 [P] Create `src/main/java/com/example/usersapi/dto/UserUpdateRequest.java` with optional password field
-- [ ] T010 [P] Create `src/main/java/com/example/usersapi/dto/UserResponse.java` with passwordHash field (no password field)
-- [ ] T011 Create `src/main/java/com/example/usersapi/config/PasswordEncoderConfig.java` with BCryptPasswordEncoder bean
-- [ ] T012 [P] Create `src/main/java/com/example/usersapi/exception/UserNotFoundException.java`
-- [ ] T013 [P] Create `src/main/java/com/example/usersapi/exception/DuplicateEmailException.java`
-- [ ] T014 Create `src/main/java/com/example/usersapi/exception/GlobalExceptionHandler.java` (400, 404, 409, 500) per plan.md error shape
-- [ ] T015 Create `src/main/java/com/example/usersapi/service/UserService.java` skeleton with entity↔UserResponse mapper including passwordHash
+- [x] T005 [P] Create `src/main/java/com/example/usersapi/model/Role.java` enum (USER, ADMIN)
+- [x] T006 Create `src/main/java/com/example/usersapi/model/User.java` JPA entity per data-model.md
+- [x] T007 Create `src/main/java/com/example/usersapi/repository/UserRepository.java` with `existsByEmail` and standard JpaRepository methods
+- [x] T008 [P] Create `src/main/java/com/example/usersapi/dto/UserCreateRequest.java` with Jakarta Validation annotations
+- [x] T009 [P] Create `src/main/java/com/example/usersapi/dto/UserUpdateRequest.java` with optional password field
+- [x] T010 [P] Create `src/main/java/com/example/usersapi/dto/UserResponse.java` with passwordHash field (no password field)
+- [x] T011 Create `src/main/java/com/example/usersapi/config/PasswordEncoderConfig.java` with BCryptPasswordEncoder bean
+- [x] T012 [P] Create `src/main/java/com/example/usersapi/exception/UserNotFoundException.java`
+- [x] T013 [P] Create `src/main/java/com/example/usersapi/exception/DuplicateEmailException.java`
+- [x] T014 Create `src/main/java/com/example/usersapi/exception/GlobalExceptionHandler.java` (400, 404, 409, 500) per plan.md error shape
+- [x] T015 Create `src/main/java/com/example/usersapi/service/UserService.java` skeleton with entity↔UserResponse mapper including passwordHash
 
 **Checkpoint**: Foundation ready — user story endpoints can be implemented
 
@@ -62,13 +62,13 @@
 
 ### Tests for User Story 1
 
-- [ ] T016 [P] [US1] Create `src/test/java/com/example/usersapi/service/UserServiceTest.java` — test create hashes password and maps passwordHash
-- [ ] T017 [P] [US1] Create `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java` — POST success, 400 validation, 409 duplicate (use @SpringBootTest + MockMvc + test DB or @DataJpaTest slice as appropriate)
+- [x] T016 [P] [US1] Create `src/test/java/com/example/usersapi/service/UserServiceTest.java` — test create hashes password and maps passwordHash
+- [x] T017 [P] [US1] Create `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java` — POST success, 400 validation, 409 duplicate (use @SpringBootTest + MockMvc + test DB or @DataJpaTest slice as appropriate)
 
 ### Implementation for User Story 1
 
-- [ ] T018 [US1] Implement `createUser` in `src/main/java/com/example/usersapi/service/UserService.java` (hash password, set createdAt, uniqueness check)
-- [ ] T019 [US1] Implement POST handler in `src/main/java/com/example/usersapi/controller/UserController.java` at `/api/users` returning 201 + UserResponse
+- [x] T018 [US1] Implement `createUser` in `src/main/java/com/example/usersapi/service/UserService.java` (hash password, set createdAt, uniqueness check)
+- [x] T019 [US1] Implement POST handler in `src/main/java/com/example/usersapi/controller/UserController.java` at `/api/users` returning 201 + UserResponse
 
 **Checkpoint**: User Story 1 independently testable via POST only
 
@@ -82,13 +82,13 @@
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] Add list/get tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java`
-- [ ] T021 [P] [US2] Add GET integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java` (assert no `password` key in JSON)
+- [x] T020 [P] [US2] Add list/get tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java`
+- [x] T021 [P] [US2] Add GET integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java` (assert no `password` key in JSON)
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] Implement `findAll` and `findById` in `src/main/java/com/example/usersapi/service/UserService.java`
-- [ ] T023 [US2] Add GET `/api/users` and GET `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
+- [x] T022 [US2] Implement `findAll` and `findById` in `src/main/java/com/example/usersapi/service/UserService.java`
+- [x] T023 [US2] Add GET `/api/users` and GET `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
 
 **Checkpoint**: User Stories 1 and 2 work independently
 
@@ -102,13 +102,13 @@
 
 ### Tests for User Story 3
 
-- [ ] T024 [P] [US3] Add update tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java` (password optional semantics)
-- [ ] T025 [P] [US3] Add PUT integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java`
+- [x] T024 [P] [US3] Add update tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java` (password optional semantics)
+- [x] T025 [P] [US3] Add PUT integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java`
 
 ### Implementation for User Story 3
 
-- [ ] T026 [US3] Implement `updateUser` in `src/main/java/com/example/usersapi/service/UserService.java`
-- [ ] T027 [US3] Add PUT `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
+- [x] T026 [US3] Implement `updateUser` in `src/main/java/com/example/usersapi/service/UserService.java`
+- [x] T027 [US3] Add PUT `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
 
 **Checkpoint**: User Stories 1–3 work independently
 
@@ -122,13 +122,13 @@
 
 ### Tests for User Story 4
 
-- [ ] T028 [P] [US4] Add delete tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java`
-- [ ] T029 [P] [US4] Add DELETE integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java`
+- [x] T028 [P] [US4] Add delete tests to `src/test/java/com/example/usersapi/service/UserServiceTest.java`
+- [x] T029 [P] [US4] Add DELETE integration tests to `src/test/java/com/example/usersapi/controller/UserControllerIntegrationTest.java`
 
 ### Implementation for User Story 4
 
-- [ ] T030 [US4] Implement `deleteUser` in `src/main/java/com/example/usersapi/service/UserService.java`
-- [ ] T031 [US4] Add DELETE `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
+- [x] T030 [US4] Implement `deleteUser` in `src/main/java/com/example/usersapi/service/UserService.java`
+- [x] T031 [US4] Add DELETE `/api/users/{id}` in `src/main/java/com/example/usersapi/controller/UserController.java`
 
 **Checkpoint**: Full CRUD independently functional
 
@@ -138,10 +138,10 @@
 
 **Purpose**: Documentation, validation run, README alignment
 
-- [ ] T032 [P] Update `README.md` Security/API sections for passwordHash on GET and POST/PUT rules
-- [ ] T033 Run `./mvnw test` and fix any failures
-- [ ] T034 Validate `specs/001-users-crud/quickstart.md` curl flow against running API
-- [ ] T035 [P] Add `.gitignore` entries for `target/`, `.env`, IDE files if not present
+- [x] T032 [P] Update `README.md` Security/API sections for passwordHash on GET and POST/PUT rules
+- [x] T033 Run `./mvnw test` and fix any failures
+- [x] T034 Validate `specs/001-users-crud/quickstart.md` curl flow against running API
+- [x] T035 [P] Add `.gitignore` entries for `target/`, `.env`, IDE files if not present
 
 ---
 
