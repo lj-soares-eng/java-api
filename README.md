@@ -47,7 +47,7 @@ This project demonstrates core engineering practices layered architecture, REST 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/java-api.git
+git clone https://github.com/lj-soares-eng/java-api.git
 cd java-api
 ```
 
