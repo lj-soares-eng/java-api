@@ -51,34 +51,32 @@ git clone https://github.com/YOUR_USERNAME/java-api.git
 cd java-api
 ```
 
-### 2. Create the database
+### 2. Create the database (once)
 
-```bash
-CREATE DATABASE users_api;
-USE users_api;
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+Hibernate **does not** create the MySQL database—only tables inside it. Run once:
+
+```sql
+CREATE DATABASE IF NOT EXISTS users_api;
 ```
+
+On local dev, **`spring.jpa.hibernate.ddl-auto=update`** (default in `application.properties`) creates/updates the `users` table from the JPA entity. You do **not** need to run `CREATE TABLE` manually for development.
+
+For **production**, use the `prod` profile (`ddl-auto=validate`) and apply schema via SQL or migrations—the table must already match the entity.
 
 ### 3. Configure the application
-Update src/main/resources/application.properties (or application.yml):
+
+Set credentials if needed:
 
 ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/users_api
-spring.datasource.username=your_user
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=validate
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+export DB_USERNAME=root
+export DB_PASSWORD=your_password
 ```
 
-Use ddl-auto=update only during early development if you prefer Hibernate to manage schema changes.
+Default datasource settings live in `src/main/resources/application.properties`. Production overrides: `application-prod.properties` — run with:
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+```
 
 ### 4. Run the API
 

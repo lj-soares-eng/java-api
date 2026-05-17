@@ -24,7 +24,7 @@ Build a Spring Boot 3 REST API for full CRUD on `users` backed by MySQL 8, with 
 
 **Performance Goals**: Standard demo/portfolio scale (<100 concurrent clients, sub-second CRUD)
 
-**Constraints**: Layered architecture; no Spring Security filter chain in v1; secrets via env/properties; `ddl-auto=validate` for production-minded local dev (or `update` during bootstrap)
+**Constraints**: Layered architecture; no Spring Security filter chain in v1; secrets via env/properties; local `ddl-auto=update`; prod profile `ddl-auto=validate`; MySQL database `users_api` created manually once
 
 **Scale/Scope**: Single `User` entity, 5 REST endpoints, no auth in v1
 
@@ -126,9 +126,18 @@ spring.application.name=users-api
 spring.datasource.url=jdbc:mysql://localhost:3306/users_api
 spring.datasource.username=${DB_USERNAME:root}
 spring.datasource.password=${DB_PASSWORD:}
-spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
+
+Production (`application-prod.properties`, profile `prod`):
+
+```properties
+spring.jpa.hibernate.ddl-auto=validate
+```
+
+MySQL database `users_api` MUST be created once (`CREATE DATABASE`); Hibernate does not create the database.
 ```
 
 ### Error response shape

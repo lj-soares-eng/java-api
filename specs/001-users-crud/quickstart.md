@@ -10,23 +10,19 @@
 
 ## 1. Database setup
 
+Create the **database** once (Hibernate does not create databases):
+
 ```bash
 mysql -u root -p
 ```
 
 ```sql
 CREATE DATABASE IF NOT EXISTS users_api;
-USE users_api;
-
-CREATE TABLE users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
 ```
+
+**Local dev:** `application.properties` uses `spring.jpa.hibernate.ddl-auto=update` — Hibernate creates/updates the `users` table from the `User` entity. No manual `CREATE TABLE` required.
+
+**Production:** use profile `prod` (`application-prod.properties` sets `ddl-auto=validate`). The schema must exist and match entities before startup.
 
 ## 2. Application configuration
 
@@ -37,9 +33,11 @@ export DB_USERNAME=root
 export DB_PASSWORD=your_password
 ```
 
-Or edit `src/main/resources/application.properties` after implementation.
+Production run:
 
-For first local run only, you may use `spring.jpa.hibernate.ddl-auto=update` until the schema exists, then switch to `validate`.
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+```
 
 ## 3. Run the API
 

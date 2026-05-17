@@ -1,11 +1,10 @@
 <!--
 Sync Impact Report
-- Version change: (template) → 1.0.0
-- Modified principles: initial adoption (no prior ratified principles)
-- Added sections: Core Principles (5), Technology Constraints, Development Workflow, Governance
+- Version change: 1.0.0 → 1.1.0
+- Modified principles: Technology Constraints (schema management), Development Workflow
+- Added: Local dev ddl-auto=update; prod profile validate; MySQL database manual CREATE DATABASE
 - Removed sections: none
-- Templates: plan-template.md ✅ aligned (Constitution Check gates) | spec-template.md ✅ no change required | tasks-template.md ✅ no change required
-- Follow-up: README Security notes may be updated after spec to document passwordHash on GET responses
+- Follow-up: application-prod.properties added; README and quickstart.md updated
 -->
 
 # Java Users REST API Constitution
@@ -61,6 +60,12 @@ Implementation rules:
 - **Build**: Maven or Gradle; prefer the project wrapper when present.
 - **Configuration**: externalize datasource settings in `application.properties` or `application.yml`; secrets MUST NOT be committed.
 
+### Schema management (NON-NEGOTIABLE)
+
+- **Local development** MUST use `spring.jpa.hibernate.ddl-auto=update` so JPA creates/updates tables from entities.
+- **Production profile** MUST use `spring.jpa.hibernate.ddl-auto=validate` (e.g. `application-prod.properties` with `spring.profiles.active=prod`).
+- The MySQL **database** `users_api` MUST exist before startup (`CREATE DATABASE users_api` once). Hibernate does **not** create the database—only tables inside an existing database.
+
 ## Development Workflow
 
 1. Spec Kit workflow: constitution → specify → clarify (recommended) → plan → tasks → implement.
@@ -78,4 +83,4 @@ This constitution supersedes ad-hoc implementation choices. Amendments require:
 
 All pull requests and agent-generated code MUST be reviewed for compliance with Core Principles, especially layered architecture and password handling.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-16 | **Last Amended**: 2026-05-16
+**Version**: 1.1.0 | **Ratified**: 2026-05-16 | **Last Amended**: 2026-05-16
