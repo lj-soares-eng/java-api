@@ -46,8 +46,8 @@ None (single-table feature).
 ## DDL (MySQL 8)
 
 ```sql
-CREATE DATABASE IF NOT EXISTS users_api;
-USE users_api;
+CREATE DATABASE IF NOT EXISTS `JavaApi`;
+USE `JavaApi`;
 
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

@@ -17,7 +17,7 @@ mysql -u root -p
 ```
 
 ```sql
-CREATE DATABASE IF NOT EXISTS users_api;
+CREATE DATABASE IF NOT EXISTS `JavaApi`;
 ```
 
 **Local dev:** `application.properties` uses `spring.jpa.hibernate.ddl-auto=update` — Hibernate creates/updates the `users` table from the `User` entity. No manual `CREATE TABLE` required.

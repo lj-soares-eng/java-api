@@ -14,7 +14,7 @@ Build a Spring Boot 3 REST API for full CRUD on `users` backed by MySQL 8, with 
 
 **Primary Dependencies**: Spring Boot 3.x (spring-boot-starter-web, spring-boot-starter-data-jpa, spring-boot-starter-validation), spring-security-crypto (BCrypt only), mysql-connector-j, spring-boot-starter-test
 
-**Storage**: MySQL 8, database `users_api`, table `users`
+**Storage**: MySQL 8, database `JavaApi`, table `users`
 
 **Testing**: JUnit 5, Spring Boot Test, MockMvc (integration), Mockito (unit)
 
@@ -24,7 +24,7 @@ Build a Spring Boot 3 REST API for full CRUD on `users` backed by MySQL 8, with 
 
 **Performance Goals**: Standard demo/portfolio scale (<100 concurrent clients, sub-second CRUD)
 
-**Constraints**: Layered architecture; no Spring Security filter chain in v1; secrets via env/properties; local `ddl-auto=update`; prod profile `ddl-auto=validate`; MySQL database `users_api` created manually once
+**Constraints**: Layered architecture; no Spring Security filter chain in v1; secrets via env/properties; local `ddl-auto=update`; prod profile `ddl-auto=validate`; MySQL database `JavaApi` created manually once
 
 **Scale/Scope**: Single `User` entity, 5 REST endpoints, no auth in v1
 
@@ -123,7 +123,7 @@ src/test/java/com/example/usersapi/
 
 ```properties
 spring.application.name=users-api
-spring.datasource.url=jdbc:mysql://localhost:3306/users_api
+spring.datasource.url=jdbc:mysql://localhost:3306/JavaApi
 spring.datasource.username=${DB_USERNAME:root}
 spring.datasource.password=${DB_PASSWORD:}
 spring.jpa.hibernate.ddl-auto=update
@@ -137,7 +137,7 @@ Production (`application-prod.properties`, profile `prod`):
 spring.jpa.hibernate.ddl-auto=validate
 ```
 
-MySQL database `users_api` MUST be created once (`CREATE DATABASE`); Hibernate does not create the database.
+MySQL database `JavaApi` MUST be created once (`CREATE DATABASE`); Hibernate does not create the database.
 ```
 
 ### Error response shape

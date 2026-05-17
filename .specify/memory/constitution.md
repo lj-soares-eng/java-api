@@ -64,7 +64,7 @@ Implementation rules:
 
 - **Local development** MUST use `spring.jpa.hibernate.ddl-auto=update` so JPA creates/updates tables from entities.
 - **Production profile** MUST use `spring.jpa.hibernate.ddl-auto=validate` (e.g. `application-prod.properties` with `spring.profiles.active=prod`).
-- The MySQL **database** `users_api` MUST exist before startup (`CREATE DATABASE users_api` once). Hibernate does **not** create the database—only tables inside an existing database.
+- The MySQL **database** `JavaApi` MUST exist before startup (`CREATE DATABASE JavaApi` once). Hibernate does **not** create the database—only tables inside an existing database.
 
 ## Development Workflow
 

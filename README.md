@@ -56,7 +56,7 @@ cd java-api
 Hibernate **does not** create the MySQL database—only tables inside it. Run once:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS users_api;
+CREATE DATABASE IF NOT EXISTS `JavaApi`;
 ```
 
 On local dev, **`spring.jpa.hibernate.ddl-auto=update`** (default in `application.properties`) creates/updates the `users` table from the JPA entity. You do **not** need to run `CREATE TABLE` manually for development.
