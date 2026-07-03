@@ -31,7 +31,7 @@ This project demonstrates core engineering practices layered architecture, REST 
 | `id`       | INT, PK, AI    | Auto-increment primary key     |
 | `name`     | VARCHAR        | User display name              |
 | `email`    | VARCHAR        | Unique email                   |
-| `password` | VARCHAR        | Stored hashed (never plain text)|
+| `password` | VARCHAR        | BCrypt hash (exposed as `passwordHash` in JSON) |
 | `role`     | VARCHAR        | e.g. `USER`, `ADMIN`           |
 | `created_at` | TIMESTAMP    | Set at creation time           |
 
@@ -51,46 +51,46 @@ git clone https://github.com/lj-soares-eng/java-api.git
 cd java-api
 ```
 
-### 2. Create the database
+### 2. Create the database (once)
 
-```bash
-CREATE DATABASE users_api;
-USE users_api;
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+Hibernate **does not** create the MySQL database—only tables inside it. Run once:
+
+```sql
+CREATE DATABASE IF NOT EXISTS `JavaApi`;
 ```
+
+On local dev, **`spring.jpa.hibernate.ddl-auto=update`** (default in `application.properties`) creates/updates the `users` table from the JPA entity. You do **not** need to run `CREATE TABLE` manually for development.
+
+For **production**, use the `prod` profile (`ddl-auto=validate`) and apply schema via SQL or migrations—the table must already match the entity.
 
 ### 3. Configure the application
-Update src/main/resources/application.properties (or application.yml):
+
+Set credentials if needed:
 
 ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/users_api
-spring.datasource.username=your_user
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=validate
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+export DB_USERNAME=root
+export DB_PASSWORD=your_password
 ```
 
-Use ddl-auto=update only during early development if you prefer Hibernate to manage schema changes.
+Default datasource settings live in `src/main/resources/application.properties`. Production overrides: `application-prod.properties` — run with:
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+```
 
 ### 4. Run the API
 
 ```bash
 ./mvnw spring-boot:run
 ```
-Or with Gradle:
+
+Or with system Maven:
 
 ```bash
-./gradlew bootRun
+mvn spring-boot:run
 ```
-The API runs at http://localhost:8080 by default.
+
+The API runs at `http://localhost:8080` by default.
 
 
 ## API endpoints
@@ -114,22 +114,26 @@ curl -X POST http://localhost:8080/api/users \
     "role": "USER"
   }'
 ```
-Passwords must be hashed server-side (e.g. BCrypt). Do not return password in API responses.
+Responses include `passwordHash` (BCrypt) on success; plain `password` is never returned. Send `password` only in POST/PUT request bodies.
 
 ## Project structure
-```bash
-src/main/java/com/example/api/
-├── ApiApplication.java
+
+```text
+src/main/java/com/example/usersapi/
+├── UsersApiApplication.java
 ├── controller/     # REST controllers
 ├── model/          # JPA entities
 ├── repository/     # Spring Data repositories
 ├── service/        # Business logic
-└── dto/            # Request/response objects (optional)
+└── dto/            # Request/response DTOs
 ```
+
 ## Security notes
-- Hash passwords before persisting (BCryptPasswordEncoder or similar).
-- Exclude password from JSON responses.
-- Validate input (@Valid, Bean Validation).
+
+- Hash passwords with BCrypt before persisting.
+- GET `/api/users` and GET `/api/users/{id}` may include `passwordHash` in JSON (demo/debug).
+- POST/PUT success responses must not echo plain-text `password` (may include `passwordHash`).
+- Validate input (`@Valid`, Bean Validation).
 - Use HTTPS in production.
 
 ## License
