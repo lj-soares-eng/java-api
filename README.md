@@ -133,7 +133,7 @@ src/main/java/com/example/api/
 - Use HTTPS in production.
 
 ## License
-MIT (or specify your license here.)
+MIT
 
 ## Author
 Lucas Soares — GitHub
